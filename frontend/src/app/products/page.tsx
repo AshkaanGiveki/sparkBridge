@@ -1,9 +1,11 @@
 // src/app/products/page.tsx
 
+export const dynamic = "force-dynamic";
+
 import ProductCard from "@/components/product/ProductCard";
 import { Product } from "@/types/product";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3030";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL!;
 console.log("✅ [AllProductsPage] BASE_URL:", BASE_URL);
 
 export const metadata = {
@@ -32,16 +34,8 @@ export default async function AllProductsPage() {
     throw new Error("Failed to load products.");
   }
 
-  let products: Product[] = [];
-  try {
-    products = await res.json();
-    console.log("📦 [AllProductsPage] Products fetched:", products);
-  } catch (error) {
-    console.error("🔥 [AllProductsPage] JSON parse error:", error);
-    throw new Error("Failed to parse products.");
-  }
-
-  console.log("🧩 [AllProductsPage] Rendering with", products.length, "products");
+  const products: Product[] = await res.json();
+  console.log("📦 [AllProductsPage] Products fetched:", products.length);
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-10">
@@ -51,10 +45,9 @@ export default async function AllProductsPage() {
         <p className="text-muted-foreground">No products found.</p>
       ) : (
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {products.map((product) => {
-            console.log("🪪 [AllProductsPage] Rendering product:", product.id, product.name);
-            return <ProductCard key={product.id} product={product} />;
-          })}
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </div>
       )}
     </main>
