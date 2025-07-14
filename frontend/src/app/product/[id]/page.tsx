@@ -6,7 +6,7 @@ import AddToCartButton from "@/components/product/AddToCartButton";
 import ReviewsList from "@/components/product/ReviewsList";
 import ReviewsForm from "@/components/product/ReviewsForm";
 import ProductAIAssistantSection from "@/components/product/ProductAIAssistantSection";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next"; // Import ResolvingMetadata
 
 interface Product {
   id: string;
@@ -36,8 +36,7 @@ interface Product {
       color?: {
         id: string;
         name: string;
-        hexCode: string;
-      } | null;
+      };
       option: {
         name: string;
       };
@@ -58,12 +57,21 @@ interface Product {
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3030";
 
+// **UPDATED PageProps definition for Next.js 15+**
 type PageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>; // params is now a Promise
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>; // searchParams is also a Promise
 };
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const res = await fetch(`${BASE_URL}/api/products/${params.id}`);
+export async function generateMetadata(
+  { params }: PageProps, // Destructure params from the PageProps object
+  parent: ResolvingMetadata // parent metadata for extending, often optional if not used
+): Promise<Metadata> {
+  // Await params to get the actual object
+  const resolvedParams = await params;
+  const productId = resolvedParams.id; // Access the id from the awaited params
+
+  const res = await fetch(`${BASE_URL}/api/products/${productId}`);
   if (!res.ok) {
     return { title: "Sparkbridge" };
   }
@@ -89,7 +97,11 @@ export async function generateStaticParams() {
 }
 
 export default async function ProductPage({ params }: PageProps) {
-  const res = await fetch(`${BASE_URL}/api/products/${params.id}`, {
+  // Await params here as well, if you need to use them directly
+  const resolvedParams = await params;
+  const productId = resolvedParams.id;
+
+  const res = await fetch(`${BASE_URL}/api/products/${productId}`, {
     next: { revalidate: 60 },
   });
 
@@ -104,7 +116,7 @@ export default async function ProductPage({ params }: PageProps) {
         {
           id: "placeholder",
           imageName: "placeholder.jpg",
-          productId: product.id,
+          productId: product.id, // Use product.id directly here if it's already available
         },
       ];
 
