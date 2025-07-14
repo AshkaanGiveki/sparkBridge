@@ -4,9 +4,9 @@ const nextConfig: NextConfig = {
   images: {
   remotePatterns: [
     {
-      protocol: "http",
-      hostname: "localhost",
-      port: "3030",
+      protocol: "https",
+      hostname: "sparkbridge.onrender.com",
+      port: "",
       pathname: "/**"
     }
   ]
