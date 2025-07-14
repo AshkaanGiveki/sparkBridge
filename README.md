@@ -1,5 +1,8 @@
 # 🛍️ SparkBridge Shop
 
+Live Demo: [https://spark-bridge-frontend.vercel.app/products]
+Deployed via Vercel + Render + Supabase
+
 A modern full-stack e-commerce web application with AI-powered product summaries, dynamic reviews, and a beautiful responsive UI.
 
 ---
