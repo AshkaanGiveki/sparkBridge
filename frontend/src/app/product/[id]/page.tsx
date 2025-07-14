@@ -1,10 +1,11 @@
+// src/app/product/[id]/page.tsx
 import { notFound } from "next/navigation";
 import ProductGallery from "@/components/product/ProductGallery";
 import OptionsSelector from "@/components/product/OptionsSelector";
 import AddToCartButton from "@/components/product/AddToCartButton";
 import ReviewsList from "@/components/product/ReviewsList";
 import ReviewsForm from "@/components/product/ReviewsForm";
-import ProductAIAssistantSection from "../../../components/product/ProductAIAssistantSection";
+import ProductAIAssistantSection from "@/components/product/ProductAIAssistantSection";
 import { Metadata } from "next";
 
 interface Product {
@@ -57,18 +58,17 @@ interface Product {
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3030";
 
-type Props = {
+type PageProps = {
   params: { id: string };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const res = await fetch(`${BASE_URL}/api/products/${params.id}`);
   if (!res.ok) {
     return { title: "Sparkbridge" };
   }
 
   const product = await res.json();
-
   return {
     title: `${product.name} | Sparkbridge`,
     description: product.description?.slice(0, 160) || "Product details on Sparkbridge.",
@@ -88,7 +88,7 @@ export async function generateStaticParams() {
   }
 }
 
-export default async function ProductPage({ params }: Props) {
+export default async function ProductPage({ params }: PageProps) {
   const res = await fetch(`${BASE_URL}/api/products/${params.id}`, {
     next: { revalidate: 60 },
   });
