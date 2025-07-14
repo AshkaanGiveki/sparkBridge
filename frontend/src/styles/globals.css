@@ -1,0 +1,35 @@
+/* app/globals.css or styles/globals.css */
+@import "tailwindcss";
+
+/* Your other global styles can go below this line */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* custom styles here */
+@font-face {
+    font-family: ESSC-Light;
+    src: url("../assets/fonts/EncodeSansSemiCondensed-Light.ttf");
+  }
+  
+  @font-face {
+    font-family: ESSC-Medium;
+    src: url("../assets/fonts/EncodeSansSemiCondensed-Medium.ttf");
+  }
+  
+  @font-face {
+    font-family: ESSC-Regular;
+    src: url("../assets/fonts/EncodeSansSemiCondensed-Regular.ttf");
+  }
+  
+  @font-face {
+    font-family: ESSC-Bold;
+    src: url("../assets/fonts/EncodeSansSemiCondensed-Bold.ttf");
+  }
+
+  
+  *{
+    font-family: "ESSC-Medium";
+    transition: all ease-in-out 100;
+  }

@@ -1,0 +1,19 @@
+{
+    "name": "e-commerce-project",
+    "private": true,
+    "scripts": {
+      "dev": "concurrently \"npm run dev -w frontend\" \"npm run dev -w backend\"",
+      "build": "npm run build -w frontend && npm run build -w backend",
+      "start": "npm run start -w backend", 
+      "client": "npm run dev -w frontend",
+      "server": "npm run dev -w backend"
+    },
+    "devDependencies": {
+      "concurrently": "^8.2.2"
+    },
+    "workspaces": [
+      "frontend",
+      "backend"
+    ]
+  }
+  
