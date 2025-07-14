@@ -57,19 +57,19 @@ interface Product {
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3030";
 
-// **UPDATED PageProps definition for Next.js 15+**
+
 type PageProps = {
-  params: Promise<{ id: string }>; // params is now a Promise
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>; // searchParams is also a Promise
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>; 
 };
 
 export async function generateMetadata(
-  { params }: PageProps, // Destructure params from the PageProps object
-  parent: ResolvingMetadata // parent metadata for extending, often optional if not used
+  { params }: PageProps,
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // Await params to get the actual object
+
   const resolvedParams = await params;
-  const productId = resolvedParams.id; // Access the id from the awaited params
+  const productId = resolvedParams.id; 
 
   const res = await fetch(`${BASE_URL}/api/products/${productId}`);
   if (!res.ok) {
@@ -97,7 +97,7 @@ export async function generateStaticParams() {
 }
 
 export default async function ProductPage({ params }: PageProps) {
-  // Await params here as well, if you need to use them directly
+  
   const resolvedParams = await params;
   const productId = resolvedParams.id;
 
@@ -116,7 +116,7 @@ export default async function ProductPage({ params }: PageProps) {
         {
           id: "placeholder",
           imageName: "placeholder.jpg",
-          productId: product.id, // Use product.id directly here if it's already available
+          productId: product.id,
         },
       ];
 

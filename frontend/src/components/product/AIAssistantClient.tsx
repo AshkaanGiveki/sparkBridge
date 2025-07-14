@@ -22,7 +22,7 @@ export default function AIAssistantClient({
   useEffect(() => {
     const fetchSummary = async () => {
       try {
-        const res = await fetch("http://localhost:3030/api/ai/summary", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ai/summary`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ productId, name, description, reviews: reviews?.map(r => r.text) || [] }),
