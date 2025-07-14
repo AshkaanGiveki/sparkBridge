@@ -1,41 +1,103 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛍️ SparkBridge Shop
 
-## Getting Started
+A modern full-stack e-commerce web application with AI-powered product summaries, dynamic reviews, and a beautiful responsive UI.
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- 🖼️ Product gallery
+- 🔎 AI-generated smart summaries
+- 🛒 Add to Cart & quantity control
+- ❤️ Persistent product "like" state
+- 🧠 AI Assistant with typing animation
+- ✍️ Real-time customer reviews
+- 📱 Fully responsive (mobile-first)
+- ⚡ Built with performance and scalability in mind
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer         | Tech                                   |
+| ------------- | -------------------------------------- |
+| Frontend      | Next.js 14+, React 18, TailwindCSS     |
+| Backend       | Express.js (Node.js)                   |
+| Database      | PostgreSQL via Prisma ORM & Supbase    |
+| LLM           | OpenAI API                             |
+
+---
+
+## 📂 Folder Structure
+
+.
+├── frontend/ # Frontend (Next.js)
+│ ├── components/ # Shared UI components
+│ ├── app/ # Next.js routing
+│ └── styles/ # Global styles
+├── backend/ # Backend (Express.js)
+│ ├── routes/ # API route handlers
+│ ├── controllers/ # Logic for routes
+│ ├── prisma/ # Prisma schema & seed
+│ └── middlewares/ # Auth, error handling, etc.
+└── README.md
+
+
+---
+
+## 🚀 Getting Started
+
+### 🔧 Prerequisites
+
+- Node.js v18+
+- PostgreSQL database
+- Git
+
+### 🔄 Clone the Repository
 
 ```bash
+git clone https://github.com/AshkaanGiveki/sparkbridge.git
+cd sparkbridge-shop
+
+📦 Installation
+1. Install client dependencies
+
+cd frontend
+npm install
+
+2. Install server dependencies
+
+cd ../backend
+npm install
+
+⚙️ Environment Variables
+
+Create a .env file in both client and server directories:
+✅ For frontend/.env.local
+
+NEXT_PUBLIC_API_URL=http://localhost:3030 ["Your Backend Server Address"]
+API_BASE_URL=http://localhost:3030/api ["Your API Base URL Address"]
+
+
+🧪 Run the App Locally
+1. Generate the database
+
+cd server
+npx prisma migrate dev --name init
+npx prisma generate
+
+
+2. Start the frontend and backend app concurrently
+
+cd ..
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🧠 AI Assistant (TypingContent)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+AI summaries are dynamically generated and typed word-by-word in a stylized container, with real-time bullet separation, bold formatting, and category grouping.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+💬 Contact
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# sparkbridge-shop
-SparkBridge Shop
->>>>>>> 339e113ce6c0a121d9a330641201baa20e2ef628
+Ashkan Giveki
+GitHub: @AshkaanGiveki
+Email: givekia@gmail.com
